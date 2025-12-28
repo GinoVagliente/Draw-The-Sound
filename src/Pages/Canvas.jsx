@@ -7,7 +7,7 @@ const Canvas = () => {
   const song = location.state?.song;
 
   return (
-    <div className="bg-gradient-to-b from-[rgb(255,213,183)] to-[rgb(255,147,123)] w-full min-h-screen flex flex-col items-center">
+    <div className="bg-gradient-to-b from-[rgb(250,219,197)] to-[rgb(255,147,123)] w-full min-h-screen flex flex-col items-center">
       <div className="mt-5">
         <MediaPlayer song={song} />
       </div>

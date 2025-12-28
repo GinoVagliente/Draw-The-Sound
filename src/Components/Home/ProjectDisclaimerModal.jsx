@@ -55,7 +55,7 @@ const ProjectDisclaimerModal = ({ onAccept }) => {
               </p>
               <button
                 onClick={handleAccept}
-                className="bg-[#7a4b2e] text-[#FFC19E] px-6 py-3 rounded-xl [font-family:'Short_Stack',sans-serif] mt-5"
+                className="cursor-pointer bg-[#7a4b2e] text-[#FFC19E] p-3 rounded-xl hover:bg-[#FFC19E] hover:text-[#7a4b2e] transition-all duration-200  px-6 py-3 [font-family:'Short_Stack',sans-serif] mt-5"
               >
                 Accept
               </button>

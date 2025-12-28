@@ -1,115 +1,167 @@
 import { useState, useEffect } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-//This are the mocks
 const Rate = () => {
-    const drawings = [
-        { id: 1, img: "/Drawing1.PNG", song: "Lost in Japan - Shawn Mendes", defaultRating: 4.5 },
-        { id: 2, img: "/Drawing2.PNG", song: "Save Your Tears - The Weeknd", defaultRating: 3.5 },
-        { id: 3, img: "/Drawing3.PNG", song: "As It Was - Harry Styles", defaultRating: 5 },
-        { id: 4, img: "/Drawing4.PNG", song: "Night Changes - One Direction", defaultRating: 4 },
-    ];
+  const baseDrawings = [
+    { id: 1, img: "/Drawing1.PNG", song: "Lost in Japan - Shawn Mendes", defaultRating: 4.5 },
+    { id: 2, img: "/Drawing2.PNG", song: "Save Your Tears - The Weeknd", defaultRating: 3.5 },
+    { id: 3, img: "/Drawing3.PNG", song: "As It Was - Harry Styles", defaultRating: 5 },
+    { id: 4, img: "/Drawing4.PNG", song: "Night Changes - One Direction", defaultRating: 4 },
+  ];
 
-    const FIVE_MINUTES = 1000 * 60 * 5;
+  const ONE_MINUTE = 1000 * 60;
 
-    const [ratings, setRatings] = useState(() => {
-        const saved = localStorage.getItem("ratings");
-        const savedTime = localStorage.getItem("ratingsTime");
-        const now = Date.now();
+  const [ratings, setRatings] = useState(() => {
+    const saved = localStorage.getItem("ratings");
+    const savedTime = localStorage.getItem("ratingsTime");
+    const now = Date.now();
 
-        if (saved && savedTime && now - savedTime < FIVE_MINUTES) {
-            return JSON.parse(saved);
-        }
+    if (saved && savedTime && now - savedTime < ONE_MINUTE) {
+      return JSON.parse(saved);
+    }
 
-        const defaults = drawings.reduce((acc, d) => {
-            acc[d.id] = d.defaultRating;
-            return acc;
-        }, {});
-        return defaults;
-    });
+    const defaults = baseDrawings.reduce((acc, d) => {
+      acc[d.id] = d.defaultRating;
+      return acc;
+    }, {});
+    return defaults;
+  });
 
-    useEffect(() => {
-        localStorage.setItem("ratings", JSON.stringify(ratings));
-        localStorage.setItem("ratingsTime", Date.now());
-    }, [ratings]);
+  const [uploadedDrawings, setUploadedDrawings] = useState([]);
 
-    const handleRating = (id, value) => {
-        setRatings((prev) => ({ ...prev, [id]: value }));
-    };
+  useEffect(() => {
+    localStorage.setItem("ratings", JSON.stringify(ratings));
+    localStorage.setItem("ratingsTime", Date.now());
+  }, [ratings]);
 
-    const renderStar = (rating, starIndex) => {
-        if (rating >= starIndex) return <FaStar className="text-yellow-400" />;
-        if (rating >= starIndex - 0.5) return <FaStarHalfAlt className="text-yellow-400" />;
-        return <FaRegStar className="text-gray-300 hover:text-yellow-400" />;
-    };
+  useEffect(() => {
+    const saved = localStorage.getItem("uploadedDrawings");
+    const savedTime = localStorage.getItem("uploadedDrawingsTime");
+    const now = Date.now();
 
-    const handleClick = (e, drawingId, starIndex) => {
-        const { left, width } = e.currentTarget.getBoundingClientRect();
-        const clickX = e.clientX - left;
-        const isHalf = clickX < width / 2;
-        const value = isHalf ? starIndex - 0.5 : starIndex;
-        handleRating(drawingId, value);
-    };
+    if (saved && savedTime) {
+      if (now - savedTime < ONE_MINUTE) {
+        setUploadedDrawings(JSON.parse(saved));
+      } else {
+        localStorage.removeItem("uploadedDrawings");
+        localStorage.removeItem("uploadedDrawingsTime");
+        setUploadedDrawings([]);
+      }
+    }
+  }, []);
 
-    const calculateCommunityRating = (drawingId) => {
-        const rating = ratings[drawingId] ?? drawings.find(d => d.id === drawingId).defaultRating;
-        return rating;
-    };
+  const handleRating = (id, value) => {
+    setRatings((prev) => ({ ...prev, [id]: value }));
+  };
 
-    return (
-        <div className="w-full min-h-screen bg-gradient-to-b from-[rgb(255,213,183)] to-[rgb(255,147,123)] flex flex-col items-center py-20 px-5">
-            <h1 className="text-3xl md:text-4xl font-bold text-[#7a4b2e] mb-10">
-                Rate Drawings by Others
-            </h1>
+  const renderStar = (rating, starIndex) => {
+    if (rating >= starIndex) return <FaStar className="text-yellow-400 text-1xl" />;
+    if (rating >= starIndex - 0.5) return <FaStarHalfAlt className="text-yellow-400  text-1xl" />;
+    return <FaRegStar className="text-gray-300 hover:text-yellow-400  text-1xl" />;
+  };
 
-            <ul className="w-full max-w-3xl flex flex-col gap-6">
-                {drawings.map((drawing) => (
-                    <li
-                        key={drawing.id}
-                        className="flex flex-col md:flex-row items-center gap-5 bg-white/70 backdrop-blur-md border-4 border-[#7a4b2e] rounded-2xl shadow-md p-4 transition hover:scale-[1.01]"
-                    >
-                        <img
-                            src={drawing.img}
-                            alt={`Drawing ${drawing.id}`}
-                            className="w-48 h-48 object-contain rounded-xl border border-[#7a4b2e]/30"
-                        />
-                        <div className="flex flex-col items-center md:items-start flex-1">
-                            <h2 className="text-lg font-semibold text-[#7a4b2e] text-center md:text-left mb-2">
-                                {drawing.song}
-                            </h2>
+  const handleClick = (e, drawingId, starIndex) => {
+    const { left, width } = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - left;
+    const isHalf = clickX < width / 2;
+    const value = isHalf ? starIndex - 0.5 : starIndex;
+    handleRating(drawingId, value);
+  };
 
-                            <div className="flex gap-1 mb-2">
-                                {[1, 2, 3, 4, 5].map((starIndex) => (
-                                    <span
-                                        key={starIndex}
-                                        onClick={(e) => handleClick(e, drawing.id, starIndex)}
-                                        className="cursor-pointer text-2xl transition-transform hover:scale-110"
-                                    >
-                                        {renderStar(ratings[drawing.id] || 0, starIndex)}
-                                    </span>
-                                ))}
-                            </div>
+  const calculateCommunityRating = (drawingId, defaultRating) => {
+    return ratings[drawingId] ?? defaultRating;
+  };
 
-                            <p className="text-[#7a4b2e] text-sm font-medium mb-1">
-                                {ratings[drawing.id]
-                                    ? `You rated ${ratings[drawing.id]} star${ratings[drawing.id] > 1 ? "s" : ""}`
-                                    : "No rating yet"}
-                            </p>
+  const allDrawings = [
+    ...baseDrawings,
+    ...uploadedDrawings.map((d, i) => ({
+      id: 1000 + i,
+      img: d.img,
+      song: "User Upload",
+      defaultRating: 0,
+    })),
+  ];
 
-                            <div className="flex items-center gap-1">
-                                <span className="text-sm font-medium text-[#7a4b2e]">Community Rated:</span>
-                                {[1, 2, 3, 4, 5].map((starIndex) => (
-                                    <span key={starIndex}>
-                                        {renderStar(calculateCommunityRating(drawing.id), starIndex)}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+  return (
+    <div className="w-full min-h-screen bg-gradient-to-b from-[rgb(250,219,197)] to-[rgb(255,147,123)] flex flex-col items-center py-15 px-5">
+
+      <div className="mb-14 relative inline-flex items-center justify-center ">
+
+        <div className="absolute top-2 right-2 w-full h-full rounded-full bg-[#7a4b2e] opacity-20 z-0"></div>
+
+        <div className="relative px-10 py-5 rounded-full bg-gradient-to-b from-[rgb(255,198,150)] to-[rgb(255,160,120)] border-[4px] border-[#7a4b2e] z-10">
+          <span className="absolute left-4 top-4 w-2 h-2 bg-white/70 rounded-full" />
+          <span className="absolute left-7 top-7 w-1.5 h-1.5 bg-white/60 rounded-full" />
+          <span className="absolute right-5 top-5 w-2 h-2 bg-white/70 rounded-full" />
+
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#FFC19E] [font-family:'Short_Stack',sans-serif] [-webkit-text-stroke:6px_#7a4b2e] [paint-order:stroke_fill] whitespace-nowrap">
+            Rate Drawings by Others
+          </h1>
         </div>
-    );
+      </div>
+
+      <ul className="w-full max-w-3xl flex flex-col gap-6">
+
+        {allDrawings.map((drawing) => (
+          <div key={drawing.id} className="relative group">
+            <div className="absolute top-2 right-2 w-full h-full rounded-2xl bg-[#7a4b2e] opacity-20 z-0 transition-transform duration-300 group-hover:scale-[1.01] group-hover:opacity-50" />
+
+            <li className="relative flex flex-col md:flex-row items-center gap-5 bg-gradient-to-b from-[rgb(255,233,214)] to-[rgb(255,204,183)] border-4 border-[#7a4b2e] rounded-2xl p-4 transition transform hover:scale-[1.01] z-10">
+              <span className="absolute right-4.5 bottom-8 w-2 h-2 bg-white/45 rounded-full" />
+              <span className="absolute right-2 bottom-6 w-2 h-2 bg-white/45 rounded-full" />
+              <span className="absolute right-5 bottom-5 w-1.5 h-1.5 bg-white/45 rounded-full" />
+              <span className="absolute right-1 bottom-1 w-4 h-4 bg-white/45 rounded-full" />
+
+              <img
+                src={drawing.img}
+                alt={`Drawing ${drawing.id}`}
+                className="w-48 h-48 object-contain rounded-xl border-2 border-[#7a4b2e]/30"
+              />
+
+              <div className="flex flex-col items-center md:items-start flex-1">
+                <h2 className="text-xl [font-family:'Short_Stack',sans-serif] font-bold text-[#7a4b2e] text-center md:text-left mb-2">
+                  {drawing.song}
+                </h2>
+
+                <div className="flex gap-1 mb-2">
+                  {[1, 2, 3, 4, 5].map((starIndex) => (
+                    <span
+                      key={starIndex}
+                      onClick={(e) => handleClick(e, drawing.id, starIndex)}
+                      className="cursor-pointer text-3xl transition-transform hover:scale-110"
+                    >
+                      {renderStar(ratings[drawing.id] || 0, starIndex)}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-[#7a4b2e] text-1xl mb-1 [font-family:'Short_Stack',sans-serif] font-bold">
+                  {ratings[drawing.id]
+                    ? `You rated ${ratings[drawing.id]} star${ratings[drawing.id] > 1 ? "s" : ""}`
+                    : "No rating yet"}
+                </p>
+
+                <div className="flex items-center gap-1">
+                  <span className="text-1xl text-[#7a4b2e] [font-family:'Short_Stack',sans-serif] font-bold">
+                    Community Rated:
+                  </span>
+                  {[1, 2, 3, 4, 5].map((starIndex) => (
+                    <span key={starIndex}>
+                      {renderStar(
+                        calculateCommunityRating(drawing.id, drawing.defaultRating),
+                        starIndex
+                      )}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </li>
+          </div>
+        ))}
+      </ul>
+
+    </div>
+  );
 };
 
 export default Rate;

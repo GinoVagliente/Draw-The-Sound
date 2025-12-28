@@ -4,6 +4,7 @@ import { GrRedo, GrUndo, GrPowerReset, GrDownload } from "react-icons/gr";
 import { FaPen, FaEraser } from "react-icons/fa";
 import { MdOpacity } from "react-icons/md";
 import DownloadModal from "./DownloadModal";
+import ResetModal from "./ResetModal";
 
 const DrawingStation = () => {
   const canvasRef = useRef(null);
@@ -15,6 +16,8 @@ const DrawingStation = () => {
   const [isErasing, setIsErasing] = useState(false);
   const [strokeOpacity, setStrokeOpacity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [isResetOpen, setIsResetOpen] = useState(false);
 
   const handleStrokeColorChange = (event) => {
     setStrokeColor(event.target.value);
@@ -24,8 +27,11 @@ const DrawingStation = () => {
   const handleCanvasColorChange = (event) => setCanvasColor(event.target.value);
   const handleUndoClick = () => canvasRef.current?.undo();
   const handleRedoClick = () => canvasRef.current?.redo();
-  const handleResetClick = () => canvasRef.current?.resetCanvas();
 
+  const confirmReset = () => {
+    canvasRef.current?.resetCanvas();
+    setIsResetOpen(false);
+  };
   const handlePenClick = () => {
     setStrokeColor(lastColor);
     setIsErasing(false);
@@ -48,7 +54,15 @@ const DrawingStation = () => {
   const handleStrokeWidthChange = (event) => setStrokeWidth(+event.target.value);
   const handleEraserWidthChange = (event) => setEraserWidth(+event.target.value);
 
-  const openDownloadModal = () => setIsModalOpen(true);
+  const openDownloadModal = async () => {
+    try {
+      const dataUrl = await canvasRef.current.exportImage("png");
+      setPreviewImage(dataUrl);
+      setIsModalOpen(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const closeDownloadModal = () => setIsModalOpen(false);
 
   const confirmDownload = async () => {
@@ -184,8 +198,9 @@ const DrawingStation = () => {
           >
             <GrRedo />
           </button>
+
           <button
-            onClick={handleResetClick}
+            onClick={() => setIsResetOpen(true)}
             className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
           >
             <GrPowerReset />
@@ -194,7 +209,6 @@ const DrawingStation = () => {
           <button
             onClick={openDownloadModal}
             className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
-            title="Descargar dibujo"
           >
             <GrDownload />
           </button>
@@ -203,8 +217,14 @@ const DrawingStation = () => {
 
       <DownloadModal
         isOpen={isModalOpen}
+        previewImage={previewImage}
         onConfirm={confirmDownload}
         onCancel={closeDownloadModal}
+      />
+      <ResetModal
+        isOpen={isResetOpen}
+        onConfirm={confirmReset}
+        onCancel={() => setIsResetOpen(false)}
       />
     </div>
   );
