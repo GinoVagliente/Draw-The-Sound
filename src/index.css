@@ -9,3 +9,35 @@
 .animate-shake {
   animation: shake 0.5s ease-in-out;
 }
+
+.bubble {
+  position: absolute;
+  left: var(--position);
+  bottom: -4rem;
+  background: rgb(255,183,164);
+  border-radius: 30px;
+  transform: translateX(-50%);
+  animation:
+    bubble-size var(--time) ease-in infinite var(--delay),
+    bubble-move var(--time) ease-in infinite var(--delay);
+}
+
+@keyframes bubble-size {
+  0%, 75% {
+    width: var(--size);
+    height: var(--size);
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes bubble-move {
+  from {
+    bottom: -4rem;
+  }
+  to {
+    bottom: var(--distance);
+  }
+}
