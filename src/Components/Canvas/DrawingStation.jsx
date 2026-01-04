@@ -88,8 +88,7 @@ const DrawingStation = () => {
   ];
 
   return (
-    <div className="relative w-full h-[80vh] border-8 border-[#7a4b2e] rounded-xl overflow-hidden md:mx-15 mx-5 flex flex-col">
-
+    <div className="relative w-full h-[80vh] border-5 border-[#7a4b2e] rounded-4xl overflow-hidden md:mx-15 mx-5 flex flex-col">
       <div className="flex-1">
         <ReactSketchCanvas
           ref={canvasRef}
@@ -184,34 +183,39 @@ const DrawingStation = () => {
             />
           </div>
         </div>
-
-        <div className="flex gap-2 ml-2">
-          <button
-            onClick={handleUndoClick}
-            className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
-          >
-            <GrUndo />
-          </button>
-          <button
-            onClick={handleRedoClick}
-            className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
-          >
-            <GrRedo />
-          </button>
-
-          <button
-            onClick={() => setIsResetOpen(true)}
-            className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
-          >
-            <GrPowerReset />
-          </button>
-
-          <button
-            onClick={openDownloadModal}
-            className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
-          >
-            <GrDownload />
-          </button>
+        <div className="flex gap-2 ml-2 flex-col items-center">
+          <div className="flex flex-row gap-2">
+            <button
+              onClick={handleUndoClick}
+              className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
+            >
+              <GrUndo />
+            </button>
+            <button
+              onClick={handleRedoClick}
+              className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
+            >
+              <GrRedo />
+            </button>
+            <button
+              onClick={() => setIsResetOpen(true)}
+              className="p-2 bg-white text-[#7a4b2e] rounded-full hover:bg-[#7a4b2e] hover:text-white transition"
+            >
+              <GrPowerReset />
+            </button>
+          </div>
+          <div className="flex flex-row gap-2 bg-[#7a4b2e] py-2 px-4 rounded-4xl transition-transform duration-200 hover:scale-105 cursor-pointer">
+            <button
+              onClick={openDownloadModal}
+              className="text-3xl font-bold text-[#FFC19E]
+          flex flex-wrap justify-center text-center
+          [font-family:'Short_Stack',sans-serif]    
+          [-webkit-text-stroke:8px_#7a4b2e]
+          [paint-order:stroke_fill] z-0 cursor-pointer"
+            >
+              Finish
+            </button>
+          </div>
         </div>
       </div>
 

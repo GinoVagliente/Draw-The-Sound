@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import Footer from "../Components/Footer";
-
+import Header from "../Components/Header";
 const Rate = () => {
   const baseDrawings = [
     { id: 1, img: "/Drawing1.PNG", song: "Lost in Japan - Shawn Mendes", defaultRating: 4.5 },
@@ -10,7 +10,7 @@ const Rate = () => {
     { id: 4, img: "/Drawing4.PNG", song: "Night Changes - One Direction", defaultRating: 4 },
   ];
 
-  const ONE_MINUTE = 1000 * 60;
+  const ONE_MINUTE = (1000 * 60) * 5;
 
   const [ratings, setRatings] = useState(() => {
     const saved = localStorage.getItem("ratings");
@@ -85,10 +85,9 @@ const Rate = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col justify-between bg-gradient-to-b from-[rgb(250,219,197)] to-[rgb(255,147,123)] overflow-hidden">
-
-      {/* Contenido principal */}
-      <div className="flex-1 flex flex-col items-center px-5 pt-5 pb-24">
-        <div className="mb-14 relative inline-flex items-center justify-center">
+      <div className="flex-1 flex flex-col items-center px-5 pb-24">
+        <Header />
+        <div className="mb-14 relative inline-flex items-center justify-center mt-20">
           <div className="absolute top-2 right-2 w-full h-full rounded-full bg-[#7a4b2e] opacity-20 z-0"></div>
           <div className="relative px-10 py-5 rounded-full bg-gradient-to-b from-[rgb(255,198,150)] to-[rgb(255,160,120)] border-[4px] border-[#7a4b2e] z-10">
             <span className="absolute left-4 top-4 w-2 h-2 bg-white/70 rounded-full" />
