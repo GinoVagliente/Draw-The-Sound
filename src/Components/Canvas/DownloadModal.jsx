@@ -27,7 +27,6 @@ const DownloadModal = ({ isOpen, onConfirm, onCancel, previewImage }) => {
 
   const handleDownload = () => {
     onConfirm();
-    navigate("/");
   };
 
   return (
