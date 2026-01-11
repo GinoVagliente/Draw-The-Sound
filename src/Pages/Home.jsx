@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[rgb(250,219,197)] to-[rgb(255,147,123)] overflow-hidden">
       <Header/>
-      <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden md:px-20">
+      <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden md:px-20 z-1">
         <Title startAnimation={startAnimation} />
         <Entry />
         <ButtonRate />
