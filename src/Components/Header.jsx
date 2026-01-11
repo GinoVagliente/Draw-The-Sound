@@ -29,7 +29,7 @@ const Header = () => {
     ];
 
     return (
-        <div className="absolute w-full flex flex-row justify-end mt-5 gap-6 z-10 pr-5">
+        <div className="absolute w-full flex flex-row justify-center md:justify-end mt-5 gap-6 z-10 md:pr-5">
             {links.map((link) => (
                 <a
                     key={link.title}
