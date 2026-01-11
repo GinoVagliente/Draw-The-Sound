@@ -15,7 +15,7 @@
   left: var(--position);
   bottom: -4rem;
   background: rgb(255,183,164);
-  border-radius: 30px;
+  border-radius: 15px;
   transform: translateX(-50%);
   animation:
     bubble-size var(--time) ease-in infinite var(--delay),

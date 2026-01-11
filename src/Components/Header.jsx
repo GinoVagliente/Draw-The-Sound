@@ -4,25 +4,25 @@ const Header = () => {
     const links = [
         {
             title: "DrawTheSound",
-            icon: <FaHome className="h-8 w-8 text-neutral-500 dark:text-neutral-300" />,
+            icon: <FaHome className="h-8 w-8 text-neutral-700" />,
             href: "/",
             newTab: false,
         },
         {
             title: "GitHub",
-            icon: <FaGithub className="h-8 w-8 text-neutral-500 dark:text-neutral-300" />,
+            icon: <FaGithub className="h-8 w-8 text-neutral-700" />,
             href: "https://github.com/GinoVagliente",
             newTab: true,
         },
         {
             title: "LinkedIn",
-            icon: <FaLinkedin className="h-8 w-8 text-neutral-500 dark:text-neutral-300" />,
+            icon: <FaLinkedin className="h-8 w-8 text-neutral-700" />,
             href: "https://www.linkedin.com/in/gino-vagliente-734568337/",
             newTab: true,
         },
         {
             title: "Portfolio",
-            icon: <FaFolder className="h-8 w-8 text-neutral-500 dark:text-neutral-300" />,
+            icon: <FaFolder className="h-8 w-8 text-neutral-700" />,
             href: "https://gino-vagliente-portfolio.vercel.app/",
             newTab: true,
         },
