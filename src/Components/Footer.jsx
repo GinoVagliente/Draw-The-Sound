@@ -19,7 +19,7 @@ const Footer = () => {
                   "--size": `${2 + Math.random() * (isMobile ? 1 : 4)}rem`,
                   "--distance": `${6 + Math.random() * 100}rem`,
                   "--position": `${Math.random() * 100}%`,
-                  "--time": `${2 + Math.random() * 1}s`,
+                  "--time": `${2 + Math.random() * 5}s`,
                   "--delay": `${-Math.random() * 4}s`,
                 }}
               />
