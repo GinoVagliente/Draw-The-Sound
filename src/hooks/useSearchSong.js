@@ -13,7 +13,7 @@ export const useSearchSong = () => {
     //need to change this when the backend is finally uploaded
     try {
       const res = await axios.get(
-        `http://draw-the-sound-backend.vercel.app/song/search/${encodeURIComponent(songName)}`
+        `https://draw-the-sound-backend.vercel.app/song/search/${encodeURIComponent(songName)}`
       );
       return res.data;
     } catch (err) {
