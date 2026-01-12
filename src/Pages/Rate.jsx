@@ -115,12 +115,22 @@ const Rate = () => {
                   className="w-48 h-48 object-contain rounded-xl border-2 border-[#7a4b2e]/30 cursor-pointer hover:scale-105 transition-transform"
                   onClick={() => {
                     if (drawing.img.startsWith("data:")) {
-                      const newWindow = window.open();
-                      newWindow.document.write(`<img src="${drawing.img}" />`);
+                      const byteString = atob(drawing.img.split(',')[1]);
+                      const mimeString = drawing.img.split(',')[0].split(':')[1].split(';')[0];
+                      const ab = new ArrayBuffer(byteString.length);
+                      const ia = new Uint8Array(ab);
+                      for (let i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                      }
+                      const blob = new Blob([ab], { type: mimeString });
+                      const url = URL.createObjectURL(blob);
+
+                      window.open(url, "_blank", "noopener,noreferrer");
                     } else {
                       window.open(drawing.img, "_blank", "noopener,noreferrer");
                     }
                   }}
+
                 />
 
                 <div className="flex flex-col items-center md:items-start flex-1">
