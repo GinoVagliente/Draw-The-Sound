@@ -88,7 +88,7 @@ const DrawingStation = () => {
   ];
 
   return (
-    <div className="relative w-full h-[75vh] border-5 border-[#7a4b2e] rounded-4xl overflow-hidden md:mx-15 mx-5 flex flex-col">
+    <div className="relative w-full h-[75vh] border-5 border-[#7a4b2e] rounded-4xl overflow-hidden md:mx-25 mx-5 flex flex-col">
       <div className="flex-1">
         <ReactSketchCanvas
           ref={canvasRef}
@@ -104,6 +104,7 @@ const DrawingStation = () => {
         <div className="flex gap-2 flex-nowrap items-center flex-row md:flex-col">
           <div className="flex items-center gap-1">
             <button
+              title="Pen"
               onClick={handlePenClick}
               className={`p-2 rounded-full ${!isErasing ? "bg-[#7a4b2e] text-white" : "bg-white text-[#7a4b2e]"}`}
             >
@@ -121,6 +122,7 @@ const DrawingStation = () => {
 
           <div className="flex items-center gap-1">
             <button
+              title="Eraser"
               onClick={handleEraserClick}
               className={`p-2 rounded-full ${isErasing ? "bg-[#7a4b2e] text-white" : "bg-white text-[#7a4b2e]"}`}
             >
@@ -137,7 +139,7 @@ const DrawingStation = () => {
           </div>
 
           <div className="flex items-center gap-1">
-            <label className="p-2 bg-[#7a4b2e] rounded-full text-white">
+            <label  title="Opacity" className="p-2 bg-[#7a4b2e] rounded-full text-white">
               <MdOpacity />
             </label>
             <input
