@@ -88,7 +88,7 @@ const DrawingStation = () => {
   ];
 
   return (
-    <div className="relative w-full h-[80vh] border-5 border-[#7a4b2e] rounded-4xl overflow-hidden md:mx-15 mx-5 flex flex-col">
+    <div className="relative w-full h-[70vh] border-5 border-[#7a4b2e] rounded-4xl overflow-hidden md:mx-15 mx-5 flex flex-col">
       <div className="flex-1">
         <ReactSketchCanvas
           ref={canvasRef}
