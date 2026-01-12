@@ -55,7 +55,7 @@ const DisclaimerModal = () => {
 
             <div className=" bg-gradient-to-b from-[rgb(255,213,183)] to-[rgb(255,147,123)] rounded-2xl p-6 max-w-md w-full text-center shadow-lg">
               <p className="text-[#7a4b2e] font-bold text-2xl [font-family:'Short_Stack',sans-serif] text-center">
-                Due to Spotify limitations, if you're on mobile only a preview of the song is played. Sorry!
+                Due to Spotify limitations, regardless if you're log into your spotify account if you're on mobile only a preview of the song is played. Sorry
               </p>
               <button
                 onClick={handleAccept}

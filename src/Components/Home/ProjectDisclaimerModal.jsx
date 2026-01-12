@@ -48,10 +48,9 @@ const ProjectDisclaimerModal = ({ onAccept }) => {
             <div className="bg-gradient-to-b from-[rgb(255,213,183)] to-[rgb(255,147,123)] rounded-2xl p-6 max-w-md w-full text-center shadow-lg">
               <p className="text-[#7a4b2e] font-bold text-2xl [font-family:'Short_Stack',sans-serif] text-center">
                 This is a portfolio project.
-                <br/>
-                To avoid database costs and content moderation, all drawings are saved
-                locally on your device (localStorage).
-                The backend is prepared to support database storage if the project ever needs to scale.
+                <br />
+                Please log into your Spotify account.
+                To avoid database costs and content moderation, all drawings are saved locally on your device (localStorage).
               </p>
               <button
                 onClick={handleAccept}

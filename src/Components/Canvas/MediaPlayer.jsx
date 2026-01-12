@@ -15,7 +15,7 @@ const MediaPlayer = ({ song }) => {
       const options = {
         uri: `spotify:track:${song.trackid}`,
         width: isMobile ? "350" : "400",
-        height: isMobile ? "80" : "152",
+        height: isMobile ? "80" : "100",
       };
 
       IFrameAPI.createController(element, options, () => {});
