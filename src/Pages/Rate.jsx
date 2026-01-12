@@ -112,7 +112,15 @@ const Rate = () => {
                 <img
                   src={drawing.img}
                   alt={`Drawing ${drawing.id}`}
-                  className="w-48 h-48 object-contain rounded-xl border-2 border-[#7a4b2e]/30"
+                  className="w-48 h-48 object-contain rounded-xl border-2 border-[#7a4b2e]/30 cursor-pointer hover:scale-105 transition-transform"
+                  onClick={() => {
+                    if (drawing.img.startsWith("data:")) {
+                      const newWindow = window.open();
+                      newWindow.document.write(`<img src="${drawing.img}" />`);
+                    } else {
+                      window.open(drawing.img, "_blank", "noopener,noreferrer");
+                    }
+                  }}
                 />
 
                 <div className="flex flex-col items-center md:items-start flex-1">
