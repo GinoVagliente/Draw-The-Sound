@@ -4,10 +4,9 @@ import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 const Rate = () => {
   const baseDrawings = [
-    { id: 1, img: "/Drawing1.PNG", song: "Lost in Japan - Shawn Mendes", defaultRating: 4.5 },
-    { id: 2, img: "/Drawing2.PNG", song: "Save Your Tears - The Weeknd", defaultRating: 3.5 },
-    { id: 3, img: "/Drawing3.PNG", song: "As It Was - Harry Styles", defaultRating: 5 },
-    { id: 4, img: "/Drawing4.PNG", song: "Night Changes - One Direction", defaultRating: 4 },
+    { id: 1, img: "/Drawing1.PNG", song: "Send It Up - Kanye West", defaultRating: 5 },
+    { id: 2, img: "/Drawing2.PNG", song: "Runaway - Kanye West", defaultRating: 4.5 },
+    { id: 3, img: "/Drawing3.PNG", song: "Family Business - Kanye West", defaultRating: 4 }
   ];
 
   const ONE_MINUTE = (1000 * 60) * 5;
