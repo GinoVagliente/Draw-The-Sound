@@ -46,11 +46,12 @@ const ProjectDisclaimerModal = ({ onAccept }) => {
               Disclaimer
             </h2>
             <div className="bg-gradient-to-b from-[rgb(255,213,183)] to-[rgb(255,147,123)] rounded-2xl p-6 max-w-md w-full text-center shadow-lg">
-              <p className="text-[#7a4b2e] font-bold text-2xl [font-family:'Short_Stack',sans-serif] text-center">
-                This is a portfolio project.
+              <p className="text-[#7a4b2e] font-bold md:text-2xl text-sm [font-family:'Short_Stack',sans-serif] text-center">
+                This is a portfolio project for demonstration purposes.
                 <br />
-                Please log into your Spotify account.
-                To avoid database costs and content moderation, all drawings are saved locally on your device (localStorage).
+                It originally used the Spotify API, which is no longer active due to pricing changes.
+                <br />
+                The original backend is available on my GitHub and some related files remain on this project for better context.
               </p>
               <button
                 onClick={handleAccept}

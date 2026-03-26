@@ -14,7 +14,7 @@ const Canvas = () => {
       <Header />
       <main className="mt-15 md:mt-5 flex-1 flex flex-col items-center gap-4 overflow-visible z-1 mb-5 md:mb-0">
         <MediaPlayer song={song} />
-        <DisclaimerModal />
+        {/* <DisclaimerModal /> This disclaimer only makes sense if I use the original API*/}
         <div className="w-full flex justify-center">
           <DrawingStation />
         </div>
